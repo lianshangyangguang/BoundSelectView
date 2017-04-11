@@ -2,7 +2,7 @@
 [![](https://jitpack.io/v/lianshangyangguang/gwellview.svg)](https://jitpack.io/#lianshangyangguang/GwellLibrary)   
 
 使用：<br>
-```在配置中加入自定义的仓库 ```    
+配置文件中：  
 ``` allprojects {
     repositories {
         jcenter()
