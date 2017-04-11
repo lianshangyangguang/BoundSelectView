@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GwellView.iml" filepath="$PROJECT_DIR$/GwellView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gwellviewlibrary/gwellviewlibrary.iml" filepath="$PROJECT_DIR$/gwellviewlibrary/gwellviewlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/gwellviewlibrary.iml" filepath="$PROJECT_DIR$/library/gwellviewlibrary.iml" />
     </modules>
   </component>
 </project>
