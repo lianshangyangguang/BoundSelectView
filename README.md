@@ -11,5 +11,5 @@
     }                                          
     加入依赖
     dependencies {
-    compile 'com.github.lianshangyangguang:GwellLibrary:v1.1'
+    compile 'com.github.lianshangyangguang:GwellLibrary:v1.2'
     }
