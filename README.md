@@ -1,5 +1,5 @@
-# GwellLibrary
-[![](https://jitpack.io/v/lianshangyangguang/GwellLibrary.svg)](https://jitpack.io/#lianshangyangguang/GwellLibrary)  
+#GwellViewLibrary
+[![](https://jitpack.io/v/lianshangyangguang/GwellViewLibrary.svg)](https://jitpack.io/#lianshangyangguang/GwellViewLibrary)  
 
 使用：<br>
 配置文件中：  
