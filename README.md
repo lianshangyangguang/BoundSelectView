@@ -13,7 +13,7 @@ allprojects {
     }                                          
     加入依赖
     dependencies {
-    compile 'com.github.lianshangyangguang:ViewLibrary:v1.4'
+    compile 'com.github.lianshangyangguang:ViewLibrary:v1.5'
     }
 ```
 ### ArcAngleView  
