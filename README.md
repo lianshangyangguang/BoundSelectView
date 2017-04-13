@@ -16,7 +16,7 @@ allprojects {
     compile 'com.github.lianshangyangguang:ViewLibrary:v1.4'
     }
 ```
-ArcAngleView  
+### ArcAngleView  
 布局中使用如下：
 
 ```
@@ -33,8 +33,8 @@ ArcAngleView view = (ArcAngleView)findViewById(R.id.view);
 view.setAngle(0.7f);//参数为0-1 float类型小数，即可根据百分比转到相应角度
   
   ```
-  
-BoundSelectView  
+  
+### BoundSelectView  
 布局中使用如下：
 
 ```
