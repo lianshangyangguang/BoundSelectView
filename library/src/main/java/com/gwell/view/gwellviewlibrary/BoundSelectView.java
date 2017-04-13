@@ -64,8 +64,8 @@ public class BoundSelectView extends ViewGroup {
             final int j = i;
             tx.setBackground(getResources().getDrawable(R.drawable.lib_textbg));
             tx.setTextSize(10);
-            tx.setWidth(Utils.dip2px(context, 50));
-            tx.setHeight(Utils.dip2px(context, 35));
+            tx.setWidth(Utils.dip2px(context, 37.5f));
+            tx.setHeight(Utils.dip2px(context, 46));
             tx.setVisibility(GONE);
             tx.setTextSize(12);
             tx.setTextColor(Color.WHITE);
@@ -123,7 +123,7 @@ public class BoundSelectView extends ViewGroup {
             }
         }
         root = new TextView(context);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Utils.dip2px(context, 50), Utils.dip2px(context, 27));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Utils.dip2px(context, 37.5f), Utils.dip2px(context, 19));
         root.setLayoutParams(params);
         root.setText(rootName);
         root.setTextSize(12);
@@ -186,14 +186,14 @@ public class BoundSelectView extends ViewGroup {
         if (widthMode == MeasureSpec.EXACTLY) {
             mWidth = widthSize;
         } else {
-            mWidth = Utils.dip2px(context, Utils.dip2px(context, 50));
+            mWidth = Utils.dip2px(context, Utils.dip2px(context, 37.5f));
         }
 
 
         if (heightMode == MeasureSpec.EXACTLY) {
             mHeight = heightSize;
         } else {
-            mHeight = Utils.dip2px(context, Utils.dip2px(context, 35.5f) * (subCount) + Utils.dip2px(context, 27) + Utils.dip2px(context, 11f));
+            mHeight = Utils.dip2px(context, Utils.dip2px(context, 46.5f) * (subCount) + Utils.dip2px(context, 19) + Utils.dip2px(context, 5));
         }
         setMeasuredDimension(mWidth, mHeight);
     }
@@ -201,9 +201,9 @@ public class BoundSelectView extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        int subHeight = Utils.dip2px(context, 35);
+        int subHeight = Utils.dip2px(context, 46);
         int subLineHeight = Utils.dip2px(context, 0.5f);
-        int initWidth = Utils.dip2px(context, 50);
+        int initWidth = Utils.dip2px(context, 37.5f);
 
         int height = 0;
         for (int i = 0; i < getChildCount() - 1; i++) {
@@ -219,7 +219,7 @@ public class BoundSelectView extends ViewGroup {
             }
         }
         child = getChildAt(getChildCount() - 1);
-        child.layout(0, (subHeight + subLineHeight) * subCount + Utils.dip2px(context, 11f), initWidth, (subHeight + subLineHeight) * subCount + Utils.dip2px(context, 27) + Utils.dip2px(context, 11f));
+        child.layout(0, (subHeight + subLineHeight) * subCount + Utils.dip2px(context, 5), initWidth, (subHeight + subLineHeight) * subCount + Utils.dip2px(context, 19) + Utils.dip2px(context, 5));
     }
 
     public interface ItemOnClickListener {
