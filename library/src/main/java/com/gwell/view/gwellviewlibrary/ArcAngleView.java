@@ -53,14 +53,14 @@ public class ArcAngleView extends View {
         if (widthMode == MeasureSpec.EXACTLY) {
             mWidth = widthSize;
         } else {
-            mWidth = Utils.dip2px(mContext, 90);
+            mWidth = Utils.dip2px(mContext, 85);
         }
 
 
         if (heightMode == MeasureSpec.EXACTLY) {
             mHeight = heightSize;
         } else {
-            mHeight = Utils.dip2px(mContext, 50);
+            mHeight = Utils.dip2px(mContext, 42);
         }
         setMeasuredDimension(mWidth, mHeight);
     }
@@ -88,14 +88,14 @@ public class ArcAngleView extends View {
         paint.setColor(Color.rgb(0x49,0x90,0xff));
         paint.setStyle(Paint.Style.FILL);
         paint.setAntiAlias(true);
-        canvas.rotate(currentAngle, Utils.dip2px(mContext, 41.5f), Utils.dip2px(mContext, 37.75f));
-        path.moveTo(Utils.dip2px(mContext, 41.5f), Utils.dip2px(mContext, 26));
-        path.lineTo(Utils.dip2px(mContext, 38f), Utils.dip2px(mContext, 35));
-        path.lineTo(Utils.dip2px(mContext, 45f), Utils.dip2px(mContext, 35));
+        canvas.rotate(currentAngle, Utils.dip2px(mContext, 36.5f), Utils.dip2px(mContext, 32.75f));
+        path.moveTo(Utils.dip2px(mContext, 36.5f), Utils.dip2px(mContext, 21));
+        path.lineTo(Utils.dip2px(mContext, 33f), Utils.dip2px(mContext, 30));
+        path.lineTo(Utils.dip2px(mContext, 40f), Utils.dip2px(mContext, 30));
         path.close();
         canvas.drawPath(path, paint);
         paint.setColor(Color.WHITE);
-        canvas.drawCircle(Utils.dip2px(mContext, 41.5f), Utils.dip2px(mContext, 37.75f), Utils.dip2px(mContext, 4.25f), paint);
+        canvas.drawCircle(Utils.dip2px(mContext, 36.5f), Utils.dip2px(mContext, 32.75f), Utils.dip2px(mContext, 4.25f), paint);
     }
 
     private void drawArc(Canvas canvas) {
@@ -104,11 +104,11 @@ public class ArcAngleView extends View {
         paint.setStrokeWidth(Utils.dip2px(mContext, 1));
         paint.setAntiAlias(true);
         paint.setTextSize(Utils.dip2px(mContext, 9));
-        canvas.drawArc(Utils.dip2px(mContext, 14), Utils.dip2px(mContext, 10), Utils.dip2px(mContext, 69), Utils.dip2px(mContext, 57), -35, -110, false, paint);
-        canvas.drawText("0°", Utils.dip2px(mContext, 5), Utils.dip2px(mContext, 24), paint);
-        canvas.drawText("110°", Utils.dip2px(mContext, 70), Utils.dip2px(mContext, 24), paint);
-        canvas.drawLine(Utils.dip2px(mContext, 16), Utils.dip2px(mContext, 17), Utils.dip2px(mContext, 22), Utils.dip2px(mContext, 23), paint);
-        canvas.drawLine(Utils.dip2px(mContext, 61), Utils.dip2px(mContext, 23), Utils.dip2px(mContext, 67), Utils.dip2px(mContext, 17), paint);
+        canvas.drawArc(Utils.dip2px(mContext, 9), Utils.dip2px(mContext, 5), Utils.dip2px(mContext, 64), Utils.dip2px(mContext, 52), -35, -110, false, paint);
+        canvas.drawText("0°", Utils.dip2px(mContext, 0), Utils.dip2px(mContext, 19), paint);
+        canvas.drawText("110°", Utils.dip2px(mContext, 65), Utils.dip2px(mContext, 19), paint);
+        canvas.drawLine(Utils.dip2px(mContext, 11), Utils.dip2px(mContext, 12), Utils.dip2px(mContext, 17), Utils.dip2px(mContext, 18), paint);
+        canvas.drawLine(Utils.dip2px(mContext, 56), Utils.dip2px(mContext, 18), Utils.dip2px(mContext, 62), Utils.dip2px(mContext, 12), paint);
     }
 
     public void setAngle(float percent) {
@@ -136,4 +136,6 @@ public class ArcAngleView extends View {
         animator.setDuration(500);
         animator.start();
     }
+
+
 }
