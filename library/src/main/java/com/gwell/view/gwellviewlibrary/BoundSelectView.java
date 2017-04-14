@@ -89,7 +89,7 @@ public class BoundSelectView extends ViewGroup {
                 public void onClick(View v) {
                     root.setText("");
                     if (isPopUp == 1) {
-                        comeBack();
+                        hide();
                         if (names != null && names.size() != 0) {
                             try {
                                 for (int k = 0; k < textViews.size(); k++) {
@@ -137,7 +137,7 @@ public class BoundSelectView extends ViewGroup {
                     popUp(v);
                     isPopUp = 1;
                 } else {
-                    comeBack();
+                    hide();
 
                 }
             }
@@ -151,14 +151,16 @@ public class BoundSelectView extends ViewGroup {
 
     }
 
-    private void comeBack() {
-        for (int i = 0; i < views.size(); i++) {
-            View txt = (View) views.get(i);
-            ObjectAnimator animator = ObjectAnimator.ofFloat(txt, "alpha", 1, 0);
-            animator.setDuration(100);
-            animator.setInterpolator(new AccelerateInterpolator());
-            animator.start();
-            isPopUp = 0;
+    public void hide() {
+        if (isPopUp == 1) {
+            for (int i = 0; i < views.size(); i++) {
+                View txt = (View) views.get(i);
+                ObjectAnimator animator = ObjectAnimator.ofFloat(txt, "alpha", 1, 0);
+                animator.setDuration(100);
+                animator.setInterpolator(new AccelerateInterpolator());
+                animator.start();
+                isPopUp = 0;
+            }
         }
     }
 
