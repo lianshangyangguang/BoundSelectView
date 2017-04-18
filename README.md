@@ -1,6 +1,6 @@
 # BoundSelectView #  
 
-[![](https://jitpack.io/v/lianshangyangguang/ViewLibrary.svg)](https://jitpack.io/#lianshangyangguang/BoundSelectView)  
+[![](https://jitpack.io/v/lianshangyangguang/BoundSelectView.svg)](https://jitpack.io/#lianshangyangguang/BoundSelectView)  
 
 使用：<br>
 配置文件中：  
@@ -13,7 +13,7 @@ allprojects {
     }                                          
     加入依赖
     dependencies {
-    compile 'com.github.lianshangyangguang:BoundSelectView:v1.7'
+    compile 'com.github.lianshangyangguang:BoundSelectView:v1.8'
     }
 ```
   
@@ -34,7 +34,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 代码中使用如下：
 
 ```
-BoundSelectView myBtn = (BoundSelectView)findViewById(R.id.mybtn);
+        BoundSelectView myBtn = (BoundSelectView)findViewById(R.id.mybtn);
         BoundSelectView.ItemOnClickListener itemOnClickListener =new BoundSelectView.ItemOnClickListener() {
             @Override
             public void onItemClick(int i, View v) {
