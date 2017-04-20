@@ -62,7 +62,11 @@ public class BoundSelectView extends ViewGroup {
         for (int i = 0; i < subCount; i++) {
             tx = new TextView(context);
             final int j = i;
-            tx.setBackground(getResources().getDrawable(R.drawable.lib_textbg));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                tx.setBackground(getResources().getDrawable(R.drawable.lib_textbg));
+            } else {
+                tx.setBackgroundDrawable(getResources().getDrawable(R.drawable.lib_textbg));
+            }
             tx.setTextSize(10);
             tx.setWidth(Utils.dip2px(context, 37.5f));
             tx.setHeight(Utils.dip2px(context, 46));
@@ -129,7 +133,11 @@ public class BoundSelectView extends ViewGroup {
         root.setTextSize(12);
         root.setTextColor(Color.WHITE);
         root.setGravity(Gravity.CENTER);
-        root.setBackground(getResources().getDrawable(R.drawable.lib_rootbtn));
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            root.setBackground(getResources().getDrawable(R.drawable.lib_rootbtn));
+        } else {
+            root.setBackgroundDrawable(getResources().getDrawable(R.drawable.lib_rootbtn));
+        }
         root.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
