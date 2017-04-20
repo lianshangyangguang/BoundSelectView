@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.gwell.view.gwellviewlibrary.ArcAngleView;
 import com.gwell.view.gwellviewlibrary.BoundSelectView;
 
 import java.util.ArrayList;
@@ -18,8 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
          myBtn = (BoundSelectView)findViewById(R.id.mybtn);
-        ArcAngleView view = (ArcAngleView)findViewById(R.id.view);
-        view.setAngle(1f);//参数为0-1 float类型小数，即可根据百分比转到相应角度
+
         BoundSelectView.ItemOnClickListener itemOnClickListener =new BoundSelectView.ItemOnClickListener() {
             @Override
             public void onItemClick(int i, View v) {

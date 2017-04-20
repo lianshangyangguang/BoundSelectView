@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -33,12 +34,12 @@ public class BoundSelectView extends ViewGroup {
     private String rootName = "root";
 
     public BoundSelectView(final Context context) {
-        this(context, null, 0);
+        this(context,null,0);
 
     }
 
     public BoundSelectView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        super(context,attrs);
         this.context = context;
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BoundUpView);
 
@@ -68,8 +69,8 @@ public class BoundSelectView extends ViewGroup {
                 tx.setBackgroundDrawable(getResources().getDrawable(R.drawable.lib_textbg));
             }
             tx.setTextSize(10);
-            tx.setWidth(Utils.dip2px(context, 37.5f));
-            tx.setHeight(Utils.dip2px(context, 46));
+            tx.setWidth(dip2px(37.5f));
+            tx.setHeight(dip2px(46));
             tx.setVisibility(GONE);
             tx.setTextSize(12);
             tx.setTextColor(Color.WHITE);
@@ -127,10 +128,10 @@ public class BoundSelectView extends ViewGroup {
             }
         }
         root = new TextView(context);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Utils.dip2px(context, 37.5f), Utils.dip2px(context, 19));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dip2px(37.5f), dip2px(19));
         root.setLayoutParams(params);
         root.setText(rootName);
-        root.setTextSize(12);
+        root.setTextSize(11);
         root.setTextColor(Color.WHITE);
         root.setGravity(Gravity.CENTER);
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -155,7 +156,7 @@ public class BoundSelectView extends ViewGroup {
     }
 
     public BoundSelectView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+        super( context,attrs, defStyle);
 
     }
 
@@ -196,14 +197,14 @@ public class BoundSelectView extends ViewGroup {
         if (widthMode == MeasureSpec.EXACTLY) {
             mWidth = widthSize;
         } else {
-            mWidth = Utils.dip2px(context, Utils.dip2px(context, 37.5f));
+            mWidth = dip2px(dip2px(37.5f));
         }
 
 
         if (heightMode == MeasureSpec.EXACTLY) {
             mHeight = heightSize;
         } else {
-            mHeight = Utils.dip2px(context, Utils.dip2px(context, 46.5f) * (subCount) + Utils.dip2px(context, 19) + Utils.dip2px(context, 5));
+            mHeight = dip2px(dip2px(46.5f) * (subCount) + dip2px(19) + dip2px(5));
         }
         setMeasuredDimension(mWidth, mHeight);
     }
@@ -211,9 +212,9 @@ public class BoundSelectView extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        int subHeight = Utils.dip2px(context, 46);
-        int subLineHeight = Utils.dip2px(context, 0.5f);
-        int initWidth = Utils.dip2px(context, 37.5f);
+        int subHeight = dip2px(46);
+        int subLineHeight = dip2px(0.5f);
+        int initWidth = dip2px(37.5f);
 
         int height = 0;
         for (int i = 0; i < getChildCount() - 1; i++) {
@@ -229,7 +230,7 @@ public class BoundSelectView extends ViewGroup {
             }
         }
         child = getChildAt(getChildCount() - 1);
-        child.layout(0, (subHeight + subLineHeight) * subCount + Utils.dip2px(context, 5), initWidth, (subHeight + subLineHeight) * subCount + Utils.dip2px(context, 19) + Utils.dip2px(context, 5));
+        child.layout(0, (subHeight + subLineHeight) * subCount + dip2px(5), initWidth, (subHeight + subLineHeight) * subCount + dip2px(19) + dip2px(5));
     }
 
     public interface ItemOnClickListener {
@@ -238,13 +239,6 @@ public class BoundSelectView extends ViewGroup {
 
     public void setBoundButton(ItemOnClickListener itemOnClickListener, ArrayList<String> names, String rootName) {
         this.itemOnClickListener = itemOnClickListener;
-//        if (subCount >mysubCount){
-//            for (int i = (mysubCount - 1)*2-1;i<(subCount - 1)*2+1;i++){
-//                removeViewAt(i);
-//            }
-//        }else if (subCount<mysubCount){
-//
-//        }
         if (names != null && names.size() != 0) {
 
             int length = subCount > names.size() ? names.size() : subCount;
@@ -265,12 +259,15 @@ public class BoundSelectView extends ViewGroup {
                             textViews.get(i).setTextColor(getResources().getColor(R.color.libTextBlue));
                         }
                     } catch (Exception e) {
-                        Log.d("zxy", "onClick: Exception");
                     }
                 }
             }
         }
     }
 
+    private   int dip2px(float dipValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
+    }
 
 }

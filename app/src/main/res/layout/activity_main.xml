@@ -8,16 +8,6 @@
     android:orientation="vertical"
     tools:context="com.gwell.view.gwellview.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <com.gwell.view.gwellviewlibrary.ArcAngleView
-        android:id="@+id/view"
-        android:layout_width="140dp"
-        android:layout_height="100dp"
-        />
     <com.gwell.view.gwellviewlibrary.BoundSelectView
         android:id="@+id/mybtn"
         app:subCount="3"
