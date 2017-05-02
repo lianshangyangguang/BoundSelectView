@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         names.add("超清");
         names.add("高清");
         names.add("标清");
+        names.add("测试");
 
         myBtn.setBoundButton(itemOnClickListener,names,"标清");
     }
