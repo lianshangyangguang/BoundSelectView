@@ -21,10 +21,11 @@ import java.util.ArrayList;
  * Created by xiyingzhu on 2017/4/12.
  */
 public class BoundSelectView extends ViewGroup {
-
+    private final static float WITH_DEFAULT=37.5f;
+    private final static float LINE_H_DEFAULT=0.5f;
     private Context context;
     private View child;
-    public static int subCount = 3;
+    public int subCount = 3;
     private int isPopUp = 0;
     private TextView tx, root;
     private ItemOnClickListener itemOnClickListener;
@@ -32,6 +33,12 @@ public class BoundSelectView extends ViewGroup {
     private ArrayList<TextView> textViews = new ArrayList();
     private ArrayList<String> names;
     private String rootName = "root";
+    private int Hight=0;
+    private int RootPadding=5;
+    private int ChildHigh=46;
+    private int With=0;
+    private int RootViewHight=19;
+    private int line_h=0;
 
     public BoundSelectView(final Context context) {
         this(context,null,0);
@@ -57,9 +64,15 @@ public class BoundSelectView extends ViewGroup {
         names.add(name4);
         names.add(name5);
         ta.recycle();
+        RootPadding=dip2px(RootPadding);
+        ChildHigh=dip2px(ChildHigh);
+        With=dip2px(WITH_DEFAULT);
+        RootViewHight=dip2px(RootViewHight);
+        line_h=dip2px(LINE_H_DEFAULT);
+    }
 
+    private void initData(){
         views.clear();
-
         for (int i = 0; i < subCount; i++) {
             tx = new TextView(context);
             final int j = i;
@@ -109,11 +122,7 @@ public class BoundSelectView extends ViewGroup {
                             }
                         }
                         if (itemOnClickListener != null) {
-                            try {
-                                itemOnClickListener.onItemClick(j, tx);
-                            } catch (Exception e) {
-                                Log.d("zxy", "onClick: Exception");
-                            }
+                            itemOnClickListener.onItemClick(j, tx);
                         }
                     }
                 }
@@ -134,7 +143,7 @@ public class BoundSelectView extends ViewGroup {
         root.setTextSize(11);
         root.setTextColor(Color.WHITE);
         root.setGravity(Gravity.CENTER);
-         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             root.setBackground(getResources().getDrawable(R.drawable.lib_rootbtn));
         } else {
             root.setBackgroundDrawable(getResources().getDrawable(R.drawable.lib_rootbtn));
@@ -152,7 +161,6 @@ public class BoundSelectView extends ViewGroup {
             }
         });
         addView(root);
-
     }
 
     public BoundSelectView(Context context, AttributeSet attrs, int defStyle) {
@@ -206,31 +214,51 @@ public class BoundSelectView extends ViewGroup {
         } else {
             mHeight = dip2px(dip2px(46.5f) * (subCount) + dip2px(19) + dip2px(5));
         }
+        Hight=mHeight;
         setMeasuredDimension(mWidth, mHeight);
     }
 
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        int subHeight = dip2px(46);
-        int subLineHeight = dip2px(0.5f);
-        int initWidth = dip2px(37.5f);
-
-        int height = 0;
-        for (int i = 0; i < getChildCount() - 1; i++) {
-
-            child = getChildAt(i);
-            if (i % 2 != 0) {
-                child.layout(0, height, initWidth, height + subLineHeight);
-                height += subLineHeight;
-            } else {
-                child.layout(0, height, initWidth, height + subHeight);
-                height += subHeight;
-
+//        int height = 0;
+//        for (int i = 0; i < getChildCount() - 1; i++) {
+//
+//            child = getChildAt(i);
+//            if (i % 2 != 0) {
+//                child.layout(0, height, initWidth, height + subLineHeight);
+//                height += subLineHeight;
+//            } else {
+//                child.layout(0, height, initWidth, height + subHeight);
+//                height += subHeight;
+//
+//            }
+//        }
+//        child = getChildAt(getChildCount() - 1);
+//        child.layout(0, (subHeight + subLineHeight) * subCount + dip2px(5), initWidth, (subHeight + subLineHeight) * subCount + dip2px(19) + dip2px(5));
+        //优先铺平下面的空间
+        int childCount=getChildCount();
+        int hightTemp=Hight;
+        for(int k=childCount-1;k>=0;k--){
+            child=getChildAt(k);
+            if(k==getChildCount() - 1){
+                //rootview
+                child.layout(0,Hight-RootViewHight,With,Hight);
+                hightTemp-=RootViewHight;
+                hightTemp-=RootPadding;
+            }else{
+                //nameview
+                if(k%2==0){
+                    //文本
+                    child.layout(0,hightTemp-ChildHigh,With,hightTemp);
+                    hightTemp-=ChildHigh;
+                }else{
+                    //线
+                    child.layout(0,hightTemp-line_h,With,hightTemp);
+                    hightTemp-=line_h;
+                }
             }
         }
-        child = getChildAt(getChildCount() - 1);
-        child.layout(0, (subHeight + subLineHeight) * subCount + dip2px(5), initWidth, (subHeight + subLineHeight) * subCount + dip2px(19) + dip2px(5));
     }
 
     public interface ItemOnClickListener {
@@ -241,12 +269,13 @@ public class BoundSelectView extends ViewGroup {
         this.itemOnClickListener = itemOnClickListener;
         if (names != null && names.size() != 0) {
 
-            int length = subCount > names.size() ? names.size() : subCount;
-            for (int i = 0; i < length; i++) {
+            subCount = subCount > names.size() ? names.size() : subCount;
+            //由数据决定显示的条目数
+            initData();
+            for (int i = 0; i < subCount; i++) {
                 textViews.get(i).setText(names.get(i));
                 this.names.set(i, names.get(i));
             }
-
         }
         if (!TextUtils.isEmpty(rootName)) {
             this.rootName = rootName;
