@@ -4,7 +4,7 @@
 
 使用：<br>
 配置文件中：  
-``` 
+``` groovy
 allprojects {
     repositories {
         jcenter()
@@ -20,7 +20,7 @@ allprojects {
 ### BoundSelectView  
 布局中使用如下：
 
-```
+```xml
 xmlns:app="http://schemas.android.com/apk/res-auto"
 
  <com.gwell.view.gwellviewlibrary.BoundSelectView
@@ -33,7 +33,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 ```
 代码中使用如下：
 
-```
+```java
         BoundSelectView myBtn = (BoundSelectView)findViewById(R.id.mybtn);
         BoundSelectView.ItemOnClickListener itemOnClickListener =new BoundSelectView.ItemOnClickListener() {
             @Override
