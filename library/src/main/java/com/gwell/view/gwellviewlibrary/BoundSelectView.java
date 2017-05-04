@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by xiyingzhu on 2017/4/12.
  */
-public class BoundSelectView extends ViewGroup {
+public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
     private final static float WITH_DEFAULT=37.5f;
     private final static float LINE_H_DEFAULT=0.5f;
     private Context context;
@@ -31,7 +31,7 @@ public class BoundSelectView extends ViewGroup {
     private ItemOnClickListener itemOnClickListener;
     private ArrayList views = new ArrayList();
     private ArrayList<TextView> textViews = new ArrayList();
-    private ArrayList<String> names;
+    private ArrayList<T> names=new ArrayList<>();
     private String rootName = "root";
     private int Hight=0;
     private int RootPadding=5;
@@ -51,19 +51,8 @@ public class BoundSelectView extends ViewGroup {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BoundUpView);
 
         subCount = ta.getInteger(R.styleable.BoundUpView_subCount, 1);
-        String name1 = ta.getString(R.styleable.BoundUpView_subName1);
-        String name2 = ta.getString(R.styleable.BoundUpView_subName2);
-        String name3 = ta.getString(R.styleable.BoundUpView_subName3);
-        String name4 = ta.getString(R.styleable.BoundUpView_subName4);
-        String name5 = ta.getString(R.styleable.BoundUpView_subName5);
-        rootName = ta.getString(R.styleable.BoundUpView_rootName);
-        names = new ArrayList<>();
-        names.add(name1);
-        names.add(name2);
-        names.add(name3);
-        names.add(name4);
-        names.add(name5);
         ta.recycle();
+
         RootPadding=dip2px(RootPadding);
         ChildHigh=dip2px(ChildHigh);
         With=dip2px(WITH_DEFAULT);
@@ -90,9 +79,11 @@ public class BoundSelectView extends ViewGroup {
 
             if (names != null && names.size() != 0) {
                 try {
-                    tx.setText(names.get(j));
-                    if (names.get(j).equals(rootName)) {
+                    tx.setText(names.get(j).getStr());
+                    if (names.get(j).getStr().equals(rootName)) {
                         tx.setTextColor(getResources().getColor(R.color.libTextBlue));
+                    }else{
+                        tx.setTextColor(Color.WHITE);
                     }
                 } catch (Exception e) {
                     Log.d("zxy", "onClick: Exception");
@@ -108,21 +99,12 @@ public class BoundSelectView extends ViewGroup {
                     root.setText("");
                     if (isPopUp == 1) {
                         hide();
-                        if (names != null && names.size() != 0) {
-                            try {
-                                for (int k = 0; k < textViews.size(); k++) {
-                                    if (k == j) {
-                                        textViews.get(k).setTextColor(getResources().getColor(R.color.libTextBlue));
-                                    } else
-                                        textViews.get(k).setTextColor(Color.WHITE);
-                                }
-                                root.setText(names.get(j));
-                            } catch (Exception e) {
-                                Log.d("zxy", "onClick: Exception");
-                            }
+                        if(v instanceof TextView){
+                            rootName=((TextView)v).getText().toString();
+                            root.setText(rootName);
                         }
                         if (itemOnClickListener != null) {
-                            itemOnClickListener.onItemClick(j, tx);
+                            itemOnClickListener.onItemClick(names.get(j), v);
                         }
                     }
                 }
@@ -185,12 +167,23 @@ public class BoundSelectView extends ViewGroup {
         for (int i = 0; i < views.size(); i++) {
             View txt = (View) views.get(i);
             txt.setVisibility(VISIBLE);
+            if(txt instanceof TextView){
+                changeTextColor((TextView) txt);
+            }
             ObjectAnimator animator = ObjectAnimator.ofFloat(txt, "alpha", 0, 1);
             animator.setInterpolator(new AccelerateInterpolator());
             animator.setDuration(100);
             animator.start();
         }
         bringToFront();
+    }
+
+    private void changeTextColor(TextView tx){
+        if (tx.getText().equals(root.getText())) {
+            tx.setTextColor(getResources().getColor(R.color.libTextBlue));
+        }else{
+            tx.setTextColor(Color.WHITE);
+        }
     }
 
     @Override
@@ -262,11 +255,11 @@ public class BoundSelectView extends ViewGroup {
         }
     }
 
-    public interface ItemOnClickListener {
-        void onItemClick(int i, View v);
+    public  interface ItemOnClickListener<T extends BaseSelectItem>{
+        void onItemClick(T t, View v);
     }
 
-    public void setBoundButton(ItemOnClickListener itemOnClickListener, ArrayList<String> names, String rootName) {
+    public void setBoundButton(ItemOnClickListener itemOnClickListener, ArrayList<T> names, String rootName) {
         this.itemOnClickListener = itemOnClickListener;
         clearViews();
         if (names != null && names.size() != 0) {
@@ -275,8 +268,8 @@ public class BoundSelectView extends ViewGroup {
             //由数据决定显示的条目数
             initData();
             for (int i = 0; i < subCount; i++) {
-                textViews.get(i).setText(names.get(i));
-                this.names.set(i, names.get(i));
+                textViews.get(i).setText(names.get(i).getStr());
+                this.names.add(names.get(i));
             }
         }
         if (!TextUtils.isEmpty(rootName)) {
@@ -286,7 +279,7 @@ public class BoundSelectView extends ViewGroup {
             for (int i = 0; i < subCount; i++) {
                 if (names != null && names.size() != 0) {
                     try {
-                        if (names.get(i).equals(rootName)) {
+                        if (names.get(i).getStr().equals(rootName)) {
                             textViews.get(i).setTextColor(getResources().getColor(R.color.libTextBlue));
                         }
                     } catch (Exception e) {
@@ -299,6 +292,9 @@ public class BoundSelectView extends ViewGroup {
     private void clearViews(){
         if(textViews!=null){
             textViews.clear();
+        }
+        if(names!=null){
+            names.clear();
         }
         this.removeAllViews();
     }
