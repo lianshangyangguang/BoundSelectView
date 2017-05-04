@@ -190,6 +190,7 @@ public class BoundSelectView extends ViewGroup {
             animator.setDuration(100);
             animator.start();
         }
+        bringToFront();
     }
 
     @Override
@@ -267,9 +268,10 @@ public class BoundSelectView extends ViewGroup {
 
     public void setBoundButton(ItemOnClickListener itemOnClickListener, ArrayList<String> names, String rootName) {
         this.itemOnClickListener = itemOnClickListener;
+        clearViews();
         if (names != null && names.size() != 0) {
 
-            subCount = subCount > names.size() ? names.size() : subCount;
+            subCount = names.size();
             //由数据决定显示的条目数
             initData();
             for (int i = 0; i < subCount; i++) {
@@ -292,6 +294,13 @@ public class BoundSelectView extends ViewGroup {
                 }
             }
         }
+    }
+
+    private void clearViews(){
+        if(textViews!=null){
+            textViews.clear();
+        }
+        this.removeAllViews();
     }
 
     private   int dip2px(float dipValue) {
