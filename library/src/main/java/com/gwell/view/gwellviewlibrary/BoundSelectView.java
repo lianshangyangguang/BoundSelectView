@@ -269,7 +269,7 @@ public class BoundSelectView extends ViewGroup {
         this.itemOnClickListener = itemOnClickListener;
         if (names != null && names.size() != 0) {
 
-            subCount =  names.size();
+            subCount = names.size();
             //由数据决定显示的条目数
             initData();
             for (int i = 0; i < subCount; i++) {
