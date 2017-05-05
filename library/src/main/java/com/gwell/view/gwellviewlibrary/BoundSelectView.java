@@ -285,6 +285,7 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
                     try {
                         if (names.get(i).getStr().equals(rootName)) {
                             textViews.get(i).setTextColor(getResources().getColor(R.color.libTextBlue));
+                            currentT = names.get(i);
                         }
                     } catch (Exception e) {
                     }
