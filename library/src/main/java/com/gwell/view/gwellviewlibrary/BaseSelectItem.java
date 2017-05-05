@@ -33,6 +33,25 @@ public class BaseSelectItem {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BaseSelectItem that = (BaseSelectItem) o;
+
+        if (mark != that.mark) return false;
+        return str != null ? str.equals(that.str) : that.str == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = str != null ? str.hashCode() : 0;
+        result = 31 * result + mark;
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "BaseSelectItem{" +
                 "str='" + str + '\'' +
