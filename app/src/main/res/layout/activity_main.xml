@@ -10,7 +10,7 @@
     <com.gwell.view.gwellviewlibrary.BoundSelectView
         android:id="@+id/mybtn"
         android:layout_width="40dp"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
     </com.gwell.view.gwellviewlibrary.BoundSelectView>
     <Button

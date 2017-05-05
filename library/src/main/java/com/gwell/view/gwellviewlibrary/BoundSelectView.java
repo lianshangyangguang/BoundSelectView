@@ -105,7 +105,7 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
                                 rootName=((TextView)v).getText().toString();
                                 root.setText(rootName);
                             }
-                            if (itemOnClickListener != null) {
+                            if (itemOnClickListener != null && BoundSelectView.this.currentT != null) {
                                 itemOnClickListener.onItemClick(tempT, v,currentT.equals(tempT));
                             }
                             currentT=tempT;
