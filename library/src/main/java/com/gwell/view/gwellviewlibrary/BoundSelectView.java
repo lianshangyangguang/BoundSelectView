@@ -39,6 +39,7 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
     private int With=0;
     private int RootViewHight=19;
     private int line_h=0;
+    private T currentT;
 
     public BoundSelectView(final Context context) {
         this(context,null,0);
@@ -96,15 +97,18 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
             tx.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    root.setText("");
                     if (isPopUp == 1) {
                         hide();
-                        if(v instanceof TextView){
-                            rootName=((TextView)v).getText().toString();
-                            root.setText(rootName);
-                        }
-                        if (itemOnClickListener != null) {
-                            itemOnClickListener.onItemClick(names.get(j), v);
+                        if(names!=null&&names.size()>0){
+                            T tempT=names.get(j);
+                            if(v instanceof TextView){
+                                rootName=((TextView)v).getText().toString();
+                                root.setText(rootName);
+                            }
+                            if (itemOnClickListener != null) {
+                                itemOnClickListener.onItemClick(tempT, v,currentT.equals(tempT));
+                            }
+                            currentT=tempT;
                         }
                     }
                 }
@@ -256,7 +260,7 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
     }
 
     public  interface ItemOnClickListener<T extends BaseSelectItem>{
-        void onItemClick(T t, View v);
+        void onItemClick(T t, View v,boolean isCurentItem);
     }
 
     public void setBoundButton(ItemOnClickListener itemOnClickListener, ArrayList<T> names, String rootName) {
@@ -302,6 +306,10 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
     private   int dip2px(float dipValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
+    }
+
+    public void getCurrentItem(){
+
     }
 
 }
