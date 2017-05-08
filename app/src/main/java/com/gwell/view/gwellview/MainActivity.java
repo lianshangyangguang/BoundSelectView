@@ -3,6 +3,7 @@ package com.gwell.view.gwellview;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.gwell.view.gwellviewlibrary.BaseSelectItem;
@@ -13,11 +14,19 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     BoundSelectView myBtn;
+    Button btnTest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
          myBtn = (BoundSelectView)findViewById(R.id.mybtn);
+        btnTest= (Button) findViewById(R.id.btn_testclick);
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"dddddd",Toast.LENGTH_LONG).show();
+            }
+        });
         BoundSelectView.ItemOnClickListener itemOnClickListener = new BoundSelectView.ItemOnClickListener() {
             @Override
             public void onItemClick(BaseSelectItem baseSelectItem, View view, boolean b) {

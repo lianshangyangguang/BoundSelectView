@@ -1,6 +1,5 @@
 package com.gwell.view.gwellviewlibrary;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -74,7 +72,7 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
             tx.setTextSize(10);
             tx.setWidth(dip2px(37.5f));
             tx.setHeight(dip2px(46));
-            tx.setVisibility(GONE);
+            tx.setVisibility(View.GONE);
             tx.setTextSize(12);
             tx.setTextColor(Color.WHITE);
 
@@ -105,8 +103,8 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
                                 rootName=((TextView)v).getText().toString();
                                 root.setText(rootName);
                             }
-                            if (itemOnClickListener != null && BoundSelectView.this.currentT != null) {
-                                itemOnClickListener.onItemClick(tempT, v,currentT.equals(tempT));
+                            if (itemOnClickListener != null) {
+                                itemOnClickListener.onItemClick(tempT, v,tempT.equals(currentT));
                             }
                             currentT=tempT;
                         }
@@ -117,7 +115,7 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
             if (i != subCount - 1) {
                 View lineView = new View(context);
                 lineView.setBackgroundColor(Color.WHITE);
-                lineView.setVisibility(GONE);
+                lineView.setVisibility(View.GONE);
                 views.add(lineView);
                 addView(lineView);
             }
@@ -126,7 +124,7 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dip2px(37.5f), dip2px(19));
         root.setLayoutParams(params);
         root.setText(rootName);
-        root.setTextSize(11);
+        root.setTextSize(11f);
         root.setTextColor(Color.WHITE);
         root.setGravity(Gravity.CENTER);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -154,14 +152,20 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
 
     }
 
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        return isPopUp==0;
+//    }
+
     public void hide() {
         if (isPopUp == 1) {
             for (int i = 0; i < views.size(); i++) {
                 View txt = (View) views.get(i);
-                ObjectAnimator animator = ObjectAnimator.ofFloat(txt, "alpha", 1, 0);
-                animator.setDuration(100);
-                animator.setInterpolator(new AccelerateInterpolator());
-                animator.start();
+//                ObjectAnimator animator = ObjectAnimator.ofFloat(txt, "alpha", 1, 0);
+//                animator.setDuration(100);
+//                animator.setInterpolator(new AccelerateInterpolator());
+//                animator.start();
+                txt.setVisibility(View.GONE);
                 isPopUp = 0;
             }
         }
@@ -170,14 +174,14 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
     private void popUp(View v) {
         for (int i = 0; i < views.size(); i++) {
             View txt = (View) views.get(i);
-            txt.setVisibility(VISIBLE);
+            txt.setVisibility(View.VISIBLE);
             if(txt instanceof TextView){
                 changeTextColor((TextView) txt);
             }
-            ObjectAnimator animator = ObjectAnimator.ofFloat(txt, "alpha", 0, 1);
-            animator.setInterpolator(new AccelerateInterpolator());
-            animator.setDuration(100);
-            animator.start();
+//            ObjectAnimator animator = ObjectAnimator.ofFloat(txt, "alpha", 0, 1);
+//            animator.setInterpolator(new AccelerateInterpolator());
+//            animator.setDuration(100);
+//            animator.start();
         }
         bringToFront();
     }
@@ -219,21 +223,6 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-//        int height = 0;
-//        for (int i = 0; i < getChildCount() - 1; i++) {
-//
-//            child = getChildAt(i);
-//            if (i % 2 != 0) {
-//                child.layout(0, height, initWidth, height + subLineHeight);
-//                height += subLineHeight;
-//            } else {
-//                child.layout(0, height, initWidth, height + subHeight);
-//                height += subHeight;
-//
-//            }
-//        }
-//        child = getChildAt(getChildCount() - 1);
-//        child.layout(0, (subHeight + subLineHeight) * subCount + dip2px(5), initWidth, (subHeight + subLineHeight) * subCount + dip2px(19) + dip2px(5));
         //优先铺平下面的空间
         int childCount=getChildCount();
         int hightTemp=Hight;
@@ -285,7 +274,6 @@ public class BoundSelectView<T extends BaseSelectItem> extends ViewGroup {
                     try {
                         if (names.get(i).getStr().equals(rootName)) {
                             textViews.get(i).setTextColor(getResources().getColor(R.color.libTextBlue));
-                            currentT = names.get(i);
                         }
                     } catch (Exception e) {
                     }
