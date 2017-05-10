@@ -12,7 +12,7 @@ allprojects {
     }                                          
     加入依赖
     dependencies {
-        compile 'com.github.lianshangyangguang:BoundSelectView:v2.8'
+        compile 'com.github.lianshangyangguang:SelectView:v2.8'
     }
  }
 ```
