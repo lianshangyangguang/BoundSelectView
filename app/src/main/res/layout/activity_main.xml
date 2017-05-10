@@ -5,31 +5,16 @@
     android:layout_height="match_parent"
     android:background="#c0c0c0"
     android:orientation="vertical"
-    tools:context="com.gwell.view.gwellview.MainActivity">
-    <RelativeLayout
+    tools:context="com.gwell.view.selectview.MainActivity">
+
+    <com.gwell.view.library.SelectView
+        android:id="@+id/selectview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_testclick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <com.gwell.view.gwellviewlibrary.BoundSelectView
-            android:id="@+id/mybtn"
-            android:layout_width="40dp"
-            android:layout_height="166dp">
 
-        </com.gwell.view.gwellviewlibrary.BoundSelectView>
-
-
-    </RelativeLayout>
-
-
-    <Button
-        android:text="收回"
+    </com.gwell.view.library.SelectView>
+    <TextView
+        android:text="text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="change"
-        />
-
-
+        android:layout_height="wrap_content" />
 </LinearLayout>

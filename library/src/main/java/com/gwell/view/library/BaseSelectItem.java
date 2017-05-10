@@ -1,18 +1,26 @@
-package com.gwell.view.gwellviewlibrary;
+package com.gwell.view.library;
 
 /**
  * Created by dansesshou on 17/5/4.
  */
 
-public class BaseSelectItem {
+public class BaseSelectItem<E> {
     private String str;
-    private int mark;
+    private E mark;
 
     public BaseSelectItem() {
     }
 
-    public BaseSelectItem(String str, int mark) {
+    public BaseSelectItem(String str, E mark) {
         this.str = str;
+        this.mark = mark;
+    }
+
+    public E getMark() {
+        return mark;
+    }
+
+    public void setMark(E mark) {
         this.mark = mark;
     }
 
@@ -24,13 +32,6 @@ public class BaseSelectItem {
         this.str = str;
     }
 
-    public int getMark() {
-        return mark;
-    }
-
-    public void setMark(int mark) {
-        this.mark = mark;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -45,17 +46,11 @@ public class BaseSelectItem {
     }
 
     @Override
-    public int hashCode() {
-        int result = str != null ? str.hashCode() : 0;
-        result = 31 * result + mark;
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "BaseSelectItem{" +
                 "str='" + str + '\'' +
                 ", mark=" + mark +
                 '}';
     }
+
 }

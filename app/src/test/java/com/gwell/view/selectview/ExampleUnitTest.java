@@ -1,4 +1,4 @@
-package com.gwell.view.gwellview;
+package com.gwell.view.selectview;
 
 import org.junit.Test;
 

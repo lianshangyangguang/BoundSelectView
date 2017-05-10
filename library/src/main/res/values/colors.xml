@@ -6,4 +6,5 @@
     <color name="libTextPressed">#e0f7f7f7</color>
     <color name="libText">#5f000000</color>
     <color name="libTextBlue">#52a0e0</color>
+    <color name="white">#ffffff</color>
 </resources>

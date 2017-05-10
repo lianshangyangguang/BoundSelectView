@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gwell.view.gwellviewlibrary">
+    package="com.gwell.view.library">
 
     <application
         android:allowBackup="true"

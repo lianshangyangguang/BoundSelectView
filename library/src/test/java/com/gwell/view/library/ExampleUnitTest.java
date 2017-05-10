@@ -1,4 +1,4 @@
-package com.gwell.view.gwellviewlibrary;
+package com.gwell.view.library;
 
 import org.junit.Test;
 
