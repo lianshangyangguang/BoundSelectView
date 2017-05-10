@@ -1,4 +1,4 @@
-# BoundSelectView #  
+# SelectView #  
 
 [![](https://jitpack.io/v/lianshangyangguang/BoundSelectView.svg)](https://jitpack.io/#lianshangyangguang/BoundSelectView)  
 
@@ -17,7 +17,7 @@ allprojects {
  }
 ```
   
-### BoundSelectView  
+### SelectView  
 布局中使用如下：
 
 ```xml
